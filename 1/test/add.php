@@ -3,7 +3,7 @@ if(!empty($_POST["add_record"])){
     require_once("db.php");
     $sql = "INSERT INTO posts ( post_title, description, post_at ) VALUES ( :post_title, :description, :post_at )";
 
-    $pdo_statement = $pdo_conn->prepare( $sql );
+    $pdo_statement = $pdo->prepare( $sql );
 
 
     $result = $pdo_statement->execute( array(":post_title"=>$_POST["post_title"], ":description" => $_POST["description"], ":post_at" => $_POST["post_at"]  ) );

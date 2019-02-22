@@ -1,4 +1,7 @@
-<?php require_once("db.php");?>
+<?php
+require_once("db.php");
+$result = $pdo->query("SELECT * FROM posts ORDER BY id DESC");
+?>
 
 <!doctype html>
 <html lang="en">
@@ -18,13 +21,7 @@
 </head>
 <body>
 
-<?php
-$pdo_statement = $pdo->prepare("SELECT * FROM posts ORDER BY id DESC");
-$pdo_statement->execute();
-$result = $pdo_statement->fetchAll();
-?>
-
-<div style="text-align:right;margin:20px;"><a href="add.php" class="button_link"><img src="crud-icon/add.png" title="Add New Record" alt="Add New Record" style="vertical-align:bottom">Create</a></div>
+<div style="text-align:right;margin:20px;"><a href="form.php?action=create" class="button_link"><img src="crud-icon/add.png" title="Add New Record" alt="Add New Record" style="vertical-align:bottom">Create</a></div>
 <table class="tbl-qa">
     <thead>
         <tr>
@@ -36,26 +33,24 @@ $result = $pdo_statement->fetchAll();
     </thead>
     <tbody>
     <?php
-    if(!empty($result)){
-        foreach($result as $row){
-    ?>
-    <tr>
-        <td><?php echo $row["post_title"]; ?></td>
-        <td><?php echo $row["description"]; ?></td>
-        <td><?php echo $row["post_at"]; ?></td>
-        <td>
-            <a class="ajax-action-links" href="edit.php?id=<?php echo $row["id"]; ?>">
-                <img src="crud-icon/edit.png" alt="Edit" title="Edit">
-            </a>
-            <a class="ajax-action-links" href="delete.php?id=<?php echo $row["id"]; ?>">
-                <img src="crud-icon/delete.png" alt="Delete" title="Delete">
-            </a>
-        </td>
-    </tr>
+    if(!empty($result)):
+        foreach($result as $row): ?>
+        <tr>
+            <td><?php echo $row["post_title"]; ?></td>
+            <td><?php echo $row["description"]; ?></td>
+            <td><?php echo $row["post_at"]; ?></td>
+            <td>
+                <a class="ajax-action-links" href="form.php?action=edit&id=<?php echo $row["id"]; ?>" >
+                    <img src="crud-icon/edit.png" alt="Edit" title="Edit">
+                </a>
+                <a class="ajax-action-links" href="delete.php?id=<?php echo $row["id"]; ?>">
+                    <img src="crud-icon/delete.png" alt="Delete" title="Delete">
+                </a>
+            </td>
+        </tr>
     <?php
-        }
-    }
-    ?>
+        endforeach;
+    endif; ?>
     </tbody>
 </table>
 
