@@ -19,7 +19,7 @@
 <body>
 
 <?php
-$pdo_statement = $pdo->prepare("SELECT * FROM posts ORDER BY id DESC");
+$pdo_statement = $DBH->prepare("SELECT * FROM posts ORDER BY id DESC");
 $pdo_statement->execute();
 $result = $pdo_statement->fetchAll();
 ?>

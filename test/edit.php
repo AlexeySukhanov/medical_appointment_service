@@ -1,14 +1,14 @@
 <?php
 require_once("db.php");
 if(!empty($_POST["save_record"])){
-    $pdo_statement = $pdo->prepare("UPDATE posts SET post_title='" . $_POST["post_title"] . "', description='" . $_POST["description"] . "', post_at='" . $_POST["post_at"] . "' WHERE id=" . $_GET["id"]);
+    $pdo_statement = $DBH->prepare("UPDATE posts SET post_title='" . $_POST["post_title"] . "', description='" . $_POST["description"] . "', post_at='" . $_POST["post_at"] . "' WHERE id=" . $_GET["id"]);
     $result = $pdo_statement->execute();
     if($result){
         header("location:index.php");
     }
 }
 
-$pdo_statement = $pdo->prepare("SELECT * FROM posts WHERE id=" . $_GET["id"]);
+$pdo_statement = $DBH->prepare("SELECT * FROM posts WHERE id=" . $_GET["id"]);
 $pdo_statement->execute();
 $result = $pdo_statement->fetchAll();
 
