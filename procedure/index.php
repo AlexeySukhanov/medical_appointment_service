@@ -21,7 +21,7 @@ $result = $pdo->query("SELECT * FROM appointments ORDER BY id DESC");
 </head>
 <body>
 
-<div style="text-align:right;margin:20px;"><a href="form.php?action=create" class="button_link">Создать запись</a></div>
+<div style="text-align:right;margin:20px;"><a href="form.php?action=create" class="button_link">Записаться на прием</a></div>
 <table class="tbl-qa">
     <thead>
         <tr>

@@ -61,7 +61,7 @@ if($_GET["action"] == "create"){
 </head>
 <body>
 <div style="margin:20px;text-align:right;">
-    <a href="index.php" class="button_link">Перейти к списку записей</a>
+    <a href="index.php" class="button_link">Просмотр очереди</a>
 </div>
 <form action="" method="post"  class="frm-add">
     <fieldset>
