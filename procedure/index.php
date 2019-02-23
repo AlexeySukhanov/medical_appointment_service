@@ -38,7 +38,7 @@ $result = $pdo->query("SELECT * FROM appointments ORDER BY id DESC");
         foreach($result as $row): ?>
         <tr>
             <td><?= $row["id"]; ?></td>
-            <td><?= $row["visit_date"]; ?></td>
+            <td><?= date_format( date_create($row["visit_date"]), 'd-m-Y' ) ?></td>
             <td><?= $row["doctor"]; ?></td>
             <td><?= $row["symptoms"]?:'Описание симптомов отсутствует'; ?></td>
             <td><?= date_format( date_create($row["application_date"]), 'G:i:s d-m-Y' ) ?></td>
