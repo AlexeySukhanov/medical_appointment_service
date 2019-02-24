@@ -1,38 +1,34 @@
-<!doctype html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Сервис для самостоятельной записи на прием к врачу - Форма записи</title>
-</head>
-<body>
-<div>
-    <a href="index.php?action=read" class="button_link">Просмотр очереди</a>
-</div>
-<form action="" method="post"  class="frm-add">
+<?php require_once 'views/parts/header.php'; ?>
+
+<div class="h4 separator-left margin-top-3 margin-bottom-2">Форма записи на приём</div>
+<hr>
+<form action="" method="post">
     <fieldset>
-        <legend>Форма записи на приём</legend>
-        <div class="form-item">
-            <label for="doctor">Выбор доктора:</label><br>
-            <select id="doctor" name="doctor" required>
-                <option <?= $result["doctor"] == 'Терапевт'?'selected ':''; ?>value="Терапевт">Терапевт</option>
-                <option <?= $result["doctor"] == 'Хирург'?'selected ':''; ?>value="Хирург">Хирург</option>
-            </select>
-        </div>
-        <div class="form-item">
-            <label for="date">Выбор времени посещения доктора:</label><br>
-            <input id="date" type="date" name="visit_date" value="<?= $result["visit_date"]; ?>" min="<?= date('Y-m-d') ?>" max="<?= date('Y-m-d', strtotime('+4 day')); ?>" required>
-        </div>
-        <div class="form-item">
-            <label for="symptoms">Описание симптомов:</label><br>
-            <textarea id="symptoms" name="symptoms" id="" cols="30" rows="10"><?= $result["symptoms"]; ?></textarea>
-        </div>
-        <div class="form-item">
-            <input type="submit" name="send_form" value="Записаться на прием">
-        </div>
+            <div class="grid-x grid-margin-x">
+                <div class="large-6 cell">
+                    <label for="doctor">Выбор доктора</label>
+                    <select id="doctor" name="doctor" required>
+                        <option value=""></option>
+                        <option <?= $result["doctor"] == 'Терапевт'?'selected ':''; ?>value="Терапевт">Терапевт</option>
+                        <option <?= $result["doctor"] == 'Хирург'?'selected ':''; ?>value="Хирург">Хирург</option>
+                    </select>
+                </div>
+                <div class="large-6 cell">
+                    <label for="date">Выбор времени посещения доктора (пять&nbsp;ближайщих&nbsp;дат)</label>
+                    <input id="date" type="date" name="visit_date" value="<?= $result["visit_date"]; ?>" min="<?= date('Y-m-d') ?>" max="<?= date('Y-m-d', strtotime('+4 day')); ?>" required>
+                </div>
+            </div>
+            <div class="grid-x grid-margin-x">
+                <div class="large-12 cell">
+                    <label for="symptoms">Описание симптомов</label>
+                    <textarea id="symptoms" name="symptoms" rows="4" style="resize: none;"><?= $result["symptoms"]; ?></textarea>
+                    <input class="button float-right small success hollow" type="submit" name="send_form" value="<?= $button_text; ?>">
+                </div>
+
+            </div>
     </fieldset>
 </form>
-</body>
-</html>
+<hr>
+<a href="index.php?action=read" class="button expanded shadow">Просмотр очереди заявок</a>
+
+<?php require_once 'views/parts/footer.php'; ?>

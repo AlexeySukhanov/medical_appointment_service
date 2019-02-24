@@ -1,45 +1,39 @@
-<!doctype html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Сервис для самостоятельной записи на прием к врачу - Список записей</title>
-</head>
-<body>
-<div><a href="index.php?action=create" class="button_link">Записаться на прием</a></div>
-<table class="tbl-qa">
-    <thead>
-    <tr>
-        <th class="table-header">Номер заявки</th>
-        <th class="table-header">Дата приема</th>
-        <th class="table-header">Специалист</th>
-        <th class="table-header">Описание симптомов</th>
-        <th class="table-header">Дата и время формирования заявки</th>
-    </tr>
-    </thead>
-    <tbody>
-    <?php
-    if(!empty($result)):
-        foreach($result as $row): ?>
-            <tr>
-                <td><?= $row["id"]; ?></td>
-                <td><?= date_format( date_create($row["visit_date"]), 'd-m-Y' ) ?></td>
-                <td><?= $row["doctor"]; ?></td>
-                <td><?= $row["symptoms"]?:'Описание симптомов отсутствует'; ?></td>
-                <td><?= date_format( date_create($row["application_date"]), 'G:i:s d-m-Y' ) ?></td>
-                <td>
-                    <a href="index.php?action=update&id=<?= $row["id"]; ?>">Редактировать</a>/
-                    <a href="index.php?action=delete&id=<?= $row["id"]; ?>">Удалить</a>
-                </td>
-            </tr>
+<?php require_once 'views/parts/header.php'; ?>
+
+<div class="h4 separator-left margin-top-3 margin-bottom-2">Список заявок на запись к врачу</div>
+    <hr>
+    <table class="bordered hover unstriped text-center" style="font-size: smaller">
+        <thead class="">
+        <tr>
+            <th class="text-center">Номер заявки</th>
+            <th class="text-center">Дата приема</th>
+            <th class="text-center">Специалист</th>
+            <th class="text-center">Описание симптомов</th>
+            <th class="text-center">Дата&nbsp;и&nbsp;время формирования&nbsp;заявки</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
         <?php
-        endforeach;
-    endif;
-    ?>
-    </tbody>
-</table>
-</body>
-</html>
-</html>
+        if(!empty($result)):
+            foreach($result as $row): ?>
+                <tr>
+                    <td class="align-self-middle"><b><?= $row["id"]; ?></b></td>
+                    <td class="align-self-middle"><?= date_format( date_create($row["visit_date"]), 'd-m-Y' ); ?></td>
+                    <td class="align-self-middle"><?= $row["doctor"]; ?></td>
+                    <td class="align-self-middle"><?= $row["symptoms"]?:'<span class="subheader">-&nbsp;Описание отсутствует&nbsp;-</span>'; ?></td>
+                    <td class="align-self-middle"><?= date_format( date_create($row["application_date"]), 'G:i:s d-m-Y' ) ?></td>
+                    <td class="button-group tiny class=align-self-middle" style="margin:12px 0 6px;">
+                        <a class="button success hollow" href="index.php?action=update&id=<?= $row["id"]; ?>">Редактировать</a>
+                        <a class="button alert hollow" href="index.php?action=delete&id=<?= $row["id"]; ?>">Удалить</a>
+                    </td>
+                </tr>
+            <?php
+            endforeach;
+        endif;
+        ?>
+        </tbody>
+    </table>
+    <hr>
+    <a href="index.php?action=create" class="button expanded shadow">Записаться на приём</a>
+<?php require_once 'views/parts/footer.php'; ?>
