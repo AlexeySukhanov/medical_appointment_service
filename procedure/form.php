@@ -1,12 +1,5 @@
 <?php
 
-// TODO: Переделать база +
-// TODO: Заменить значения на необходимые +
-// TODO: Переделать в ООП
-// TODO: Расставить комментарии
-// TODO: Почистить классы и стили и прикрутить foundation
-// TODO: Уточнить номер билета и фомат вывода даты
-
 if($_GET["action"] == "edit"){
     require_once("db.php");
     if(!empty(trim($_POST["doctor"])) && !empty(trim($_POST["visit_date"]))){
