@@ -2,7 +2,7 @@
 
 <div class="h4 separator-left margin-top-3 margin-bottom-2">Форма записи на приём</div>
 <hr>
-<form action="" method="post">
+<form action="<?= 'http://' . $_SERVER['PHP_SELF'] . $_SERVER['REQUEST_URI'] ?>" method="post">
     <fieldset>
             <div class="grid-x grid-margin-x">
                 <div class="large-6 cell">
