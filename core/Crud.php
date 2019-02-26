@@ -22,8 +22,10 @@ class Crud extends Database
 
     public function create()
     {
+        $trimed_doctor = trim($_POST["doctor"]);
+        $trimed_visit_date = trim($_POST["visit_date"]);
         $button_text = 'Записаться на приём';
-        if(!empty(trim($_POST["doctor"])) && !empty(trim($_POST["visit_date"])) && $this->date_is_correct($_POST["visit_date"])){
+        if(!empty($trimed_doctor) && !empty($trimed_visit_date) && $this->date_is_correct($_POST["visit_date"])){
             $sql = "INSERT INTO appointments ( doctor, visit_date, symptoms ) VALUES ( :doctor, :visit_date, :symptoms )";
             $STH = $this->DBH->prepare( $sql );
             $result = $STH->execute( array(":doctor"=>trim($_POST["doctor"]), ":visit_date" => trim($_POST["visit_date"]), ":symptoms" => trim($_POST["symptoms"])) );
@@ -46,8 +48,10 @@ class Crud extends Database
 
     public function update()
     {
+        $trimed_doctor = trim($_POST["doctor"]);
+        $trimed_visit_date = trim($_POST["visit_date"]);
         $button_text = 'Сохранить изменения';
-        if(!empty(trim($_POST["doctor"])) && !empty(trim($_POST["visit_date"])) && $this->date_is_correct($_POST["visit_date"])){
+        if(!empty($trimed_doctor) && !empty($trimed_visit_date) && $this->date_is_correct($_POST["visit_date"])){
             $STH = $this->DBH->prepare("UPDATE appointments SET doctor=:doctor, visit_date=:visit_date, symptoms=:symptoms WHERE id=:id");
             $result = $STH->execute(array(':doctor' => trim($_POST["doctor"]), ':visit_date' => trim($_POST["visit_date"]), ':symptoms' => trim($_POST["symptoms"]), ':id' => trim($_GET["id"])));
             if(!empty($result)) $this->read();
